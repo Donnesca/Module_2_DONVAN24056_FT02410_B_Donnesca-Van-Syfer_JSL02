@@ -26,6 +26,17 @@ const addNewGoal = () => {
   const goalInput = document.querySelector("#goalInput").value;
   const goalList = document.querySelector("#goalList");
 
+  const existingGoals = Array.from(goalList.children).map(
+    (goal) => goal.textContent
+  );
+  if (existingGoals.includes(goalInput)) {
+    if (alert("Goal already exist!")) {
+      const newGoal = document.createElement("li");
+      newGoal.textContent = goalInput;
+      goalList.appendChild(newGoal);
+    }
+  }
+
   // ⚠️ Hint 1: Check for duplicates
   // Use 'goalList' to get all existing goals and check if 'goalInput' matches any of them.
 
@@ -40,6 +51,7 @@ const addNewGoal = () => {
   // The event listener that removes goals when clicked is not related to this issue.
   // Focus on preventing duplicates for now.
 
+  //If not duplicate, add the goal directly
   const newGoal = document.createElement("li");
   newGoal.textContent = goalInput;
   goalList.appendChild(newGoal);
@@ -90,13 +102,3 @@ document
 
 const form = document.querySelector("#goal-form");
 const goalList = document.querySelector("#fitness-goals");
-
-//See how this query works
-/*form.addEventListener('submit', function(event) {
-    event.preventDefault();
-    const goalInput = document.querySelector('#new-goal');
-    const newGoal = document.createElement('li');
-    newGoal.textContent = goalInput.value;
-    goalList.appendChild(newGoal);
-    goalInput.value = ''; // Clear input field
-});*/
